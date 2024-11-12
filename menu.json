@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Whopper",
+        "type": "burger",
+        "price": 6000
+    },
+    {
+        "name": "Whopper Set",
+        "type": "set",
+        "price": 9000
+    },
+    {
+        "name": "Cheeseburger",
+        "type": "burger",
+        "price": 4000
+    },
+    {
+        "name": "French Fries",
+        "type": "side",
+        "price": 2000
+    },
+    {
+        "name": "Coke",
+        "type": "side",
+        "price": 1500
+    }
+]
