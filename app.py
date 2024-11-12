@@ -28,6 +28,8 @@ def recommend():
     recommendation = random.choice(options)
     return jsonify(recommendation)
 
+# 홈 페이지에 대한 라우트를 추가합니다
+@app.route("/")
 def home():
     return "Welcome to BurgerKing API!"
 
