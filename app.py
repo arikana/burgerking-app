@@ -15,6 +15,8 @@ menu = load_menu()
 @app.route("/recommend", methods=["POST"])
 def recommend():
     data = request.get_json()
+    print(f"Received data: {data}")  # 요청 데이터 출력 (디버그용)
+
     budget = data.get("budget", 0)
 
     # 예산 이하의 메뉴를 필터링
@@ -27,7 +29,6 @@ def recommend():
     # 랜덤으로 메뉴 추천
     recommendation = random.choice(options)
     return jsonify(recommendation)
-
 # 홈 페이지에 대한 라우트를 추가합니다
 @app.route("/")
 def home():
