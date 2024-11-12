@@ -28,5 +28,8 @@ def recommend():
     recommendation = random.choice(options)
     return jsonify(recommendation)
 
+def home():
+    return "Welcome to BurgerKing API!"
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
