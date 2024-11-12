@@ -10,6 +10,7 @@ conda-content-trust @ file:///tmp/build/80754af9/conda-content-trust_16170455945
 conda-package-handling @ file:///C:/ci/conda-package-handling_1649106011304/work
 cryptography @ file:///C:/ci/cryptography_1639414720302/work
 Flask==3.0.3
+Flask-Cors==5.0.0
 idna @ file:///tmp/build/80754af9/idna_1637925883363/work
 importlib_metadata==8.5.0
 itsdangerous==2.2.0
