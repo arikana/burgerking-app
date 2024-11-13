@@ -4,7 +4,8 @@ import json
 import random
 
 app = Flask(__name__)
-CORS(app)
+# CORS 설정: 모든 출처 허용 및 Preflight 요청(OPTIONS 메서드) 허용
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 def load_menu():
     with open('menu.json', 'r', encoding='utf-8') as file:
@@ -12,24 +13,28 @@ def load_menu():
 
 menu = load_menu()
 
-@app.route("/recommend", methods=["POST"])
+@app.route("/recommend", methods=["POST", "OPTIONS"])
 def recommend():
-    data = request.get_json()
-    print(f"Received data: {data}")  # 요청 데이터 출력 (디버그용)
+    # Preflight 요청에 대한 응답 처리
+    if request.method == "OPTIONS":
+        response = app.make_default_options_response()
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+        return response
 
+    # POST 요청 처리
+    data = request.get_json()
     budget = data.get("budget", 0)
 
-    # 예산 이하의 메뉴를 필터링
     options = [item for item in menu if item['price'] <= budget]
 
-    # 추천 가능한 메뉴가 없을 때
     if not options:
         return jsonify({"name": "추천할 메뉴가 없습니다.", "price": 0})
 
-    # 랜덤으로 메뉴 추천
     recommendation = random.choice(options)
     return jsonify(recommendation)
-# 홈 페이지에 대한 라우트를 추가합니다
+
 @app.route("/")
 def home():
     return "Welcome to BurgerKing API!"
